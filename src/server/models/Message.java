@@ -1,5 +1,7 @@
 package server.models;
 
+import org.json.simple.JSONObject;
+
 import java.util.ArrayList;
 
 public class Message {
@@ -61,6 +63,18 @@ public class Message {
                 ", datePosted='" + datePosted + '\'' +
                 ", authorName='" + authorName + '\'' +
                 '}';
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public JSONObject toJSON () {
+
+        JSONObject j = new JSONObject();
+        j.put("id", getMessageID());
+        j.put("text", getMessageText());
+        j.put("postDate", getMessageDate());
+        j.put("author", getMessageAuthor());
+        return j;
 
     }
 
