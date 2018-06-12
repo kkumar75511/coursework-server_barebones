@@ -9,12 +9,12 @@ public class Message {
     private int messageID;
     private String messageText, datePosted, authorName;
 
-    public Message (int messageID, String messageText, String datePosted, String authorName) {
+    public Message (int messageID, String messageText, String messageDate, String messageAuthor) {
 
         this.messageID = messageID;
         this.messageText = messageText;
-        this.datePosted = datePosted;
-        this.authorName = authorName;
+        this.datePosted = messageDate;
+        this.authorName = messageAuthor;
 
     }
 
@@ -44,13 +44,13 @@ public class Message {
 
     public void setMessageText(String messageText) { this.messageText = messageText; }
 
-    public String getDatePosted() { return datePosted; }
+    public String getMessageDate() { return datePosted; }
 
-    public void setDatePosted(String datePosted) { this.datePosted = datePosted; }
+    public void setMessageDate(String datePosted) { this.datePosted = datePosted; }
 
-    public String getAuthorName() { return authorName; }
+    public String getMessageAuthor() { return authorName; }
 
-    public void setAuthorName(String authorName) { this.authorName = authorName; }
+    public void setMessageAuthor(String authorName) { this.authorName = authorName; }
 
     @Override
     public String toString () {
