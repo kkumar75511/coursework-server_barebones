@@ -1,45 +1,38 @@
 <!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-
-    <head>
-
-        <title>Practical Skills Development Barebones Server</title>
-
-        <link rel="shortcut icon" href="/client/favicon.ico" type="image/x-icon">
-
-        <script src="/client/js/jquery-3.3.1.min.js"></script>
-        <script src="/client/js/popper.min.js"></script>
-        <script src="/client/js/bootstrap.min.js"></script>
-        <script src="/client/js/js.cookie.min.js"></script>
-
-        <link href="/client/css/bootstrap.min.css" rel="stylesheet">
-
-    </head>
-
-    <body class="bg-dark">
-
-        <div class="container bg-white">
-
-            <div class="jumbotron text-center">
-                <h1>Practical Skills Development Barebones Server</h1>
-            </div>
-
-            <div class="text-center pb-4">
-                <h3>Congratulations, your server is working!</h3>
-                <img src="/client/img/face.jpg" alt="Awesome Face" />
-            </div>
-
-        </div>
-
-        <div class="text-center p-4">
-            <form action="/fruit" method="post">
-                <label>Enter the name of a fruit:
-                    <input name="chosenFruit"/>
-                </label>
-            </form>
-        </div>
-
-    </body>
-
+<html>
+<head>
+	<title>In a fuss, just discuss</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<script src="jquery-3.3.1.slim.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+</head>
+<body class="container">
+	<div class="jumbotron">
+  		<h1 class="display-4">In a fuss, just discuss</h1>
+  		<p class="lead">Do you have a problem but are too busy to sort it out, just discuss it here</p>
+		<hr class="my-4">
+		<p>This was made using html, css and bootstrap.</p>
+		<a class="btn btn-primary btn-lg" href="https://getbootstrap.com/docs/4.1/components/jumbotron/" role="button">Get bootstrap here :)</a>
+	</div>
+	<div class="card">
+  		<div class="card-body">
+    		<h2>Messages go here.</h2>
+  		</div>
+	</div>
+	<br>
+	<form>
+	  	<div class="input-group mb-3">
+	  		<div class="input-group-prepend">
+	    		<span class="input-group-text" id="basic-addon1">@</span>
+	  		</div>
+	  		<input type="text" class="form-control" placeholder="Author" aria-label="Author" aria-describedby="basic-addon1">
+		</div>
+		<div class="input-group">
+	  		<div class="input-group-prepend">
+	    		<span class="input-group-text">Message</span>
+	  		</div>
+	  		<textarea class="form-control" aria-label="Message"></textarea>
+		</div>
+	</form>
+</body>
 </html>
