@@ -21,7 +21,16 @@ public class MessageController {
 
         Message.messages.add(new Message(messageID, messageText, messageDate, messageAuthor));
 
-        return "OK";
+        StringBuilder messageSummary = new StringBuilder();
+
+        for (int i = 0; i < Message.messages.size(); i++) {
+
+            messageSummary.append(Message.messages.get(i).toString());
+            messageSummary.append("\n");
+
+        }
+
+        return messageSummary.toString();
 
     }
 
