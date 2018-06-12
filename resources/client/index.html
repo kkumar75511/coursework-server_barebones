@@ -20,19 +20,23 @@
   		</div>
 	</div>
 	<br>
-	<form>
+	<form action="/message/new" method="post">
 	  	<div class="input-group mb-3">
 	  		<div class="input-group-prepend">
 	    		<span class="input-group-text" id="basic-addon1">@</span>
 	  		</div>
-	  		<input type="text" class="form-control" placeholder="Author" aria-label="Author" aria-describedby="basic-addon1">
+	  		<input type="text" class="form-control" name="messageAuthor" placeholder="Author" aria-label="Author" aria-describedby="basic-addon1">
 		</div>
 		<div class="input-group">
 	  		<div class="input-group-prepend">
 	    		<span class="input-group-text">Message</span>
 	  		</div>
-	  		<textarea class="form-control" aria-label="Message"></textarea>
+            <input type="text" class="form-control" name="messageText" placeholder="Text" aria-label="Text" aria-describedby="basic-addon1">
 		</div>
+        <br>
+        <div>
+            <button id="messageSubmit" type="button" class="btn btn-primary btn-lg">Post</button>
+        </div>
 	</form>
 </body>
 </html>
