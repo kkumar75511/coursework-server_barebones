@@ -1,6 +1,10 @@
 package server.models;
 
+import java.util.ArrayList;
+
 public class Message {
+
+    public static ArrayList<Message> messages = new ArrayList<>();
 
     private int messageID;
     private String messageText, datePosted, authorName;
@@ -11,6 +15,24 @@ public class Message {
         this.messageText = messageText;
         this.datePosted = datePosted;
         this.authorName = authorName;
+
+    }
+
+    public static int nextID () {
+
+        int id = 0;
+
+        for (int i = 0; i < messages.size(); i++) {
+
+            if (messages.get(i).getMessageID() > id) {
+
+                id = messages.get(i).getMessageID();
+
+            }
+
+        }
+
+        return id + 1;
 
     }
 
@@ -39,7 +61,7 @@ public class Message {
                 ", datePosted='" + datePosted + '\'' +
                 ", authorName='" + authorName + '\'' +
                 '}';
-        
+
     }
 
 }
