@@ -1,5 +1,0 @@
-function pageLoad () {
-
-    alert('testing');
-
-}
