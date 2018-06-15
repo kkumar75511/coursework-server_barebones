@@ -39,4 +39,13 @@ public class MessageController {
 
     }
 
+    @GET
+    @Path("list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String listMessage () {
+
+        return getMessageList();
+
+    }
+
 }
