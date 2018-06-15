@@ -3,10 +3,13 @@
 <head>
 	<title>In a fuss, just discuss</title>
 	<!--<link rel="stylesheet" type="text/css" href="bootstrap.min.css">-->
-    <script src="/client/js/index.js"></script>
+
     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
-	<script src="jquery-3.3.1.slim.min.js"></script>
-	<script src="bootstrap.min.js"></script>
+	<script src="/client/js/jquery-3.3.1.min.js"></script>
+	<script src="/client/js/bootstrap.min.js"></script>
+
+    <script src="/client/js/index.js"></script>
+
 </head>
 <body class="container" onload="pageLoad()">
 	<div class="jumbotron">
@@ -18,11 +21,13 @@
 	</div>
 	<div class="card">
   		<div class="card-body">
-    		<h2>Messages go here.</h2>
+            <div id="messages">
+
+            </div>
   		</div>
 	</div>
 	<br>
-	<form action="/message/new" method="post">
+	<form action="/message/new" method="post" id="messageForm">
 	  	<div class="input-group mb-3">
 	  		<div class="input-group-prepend">
 	    		<span class="input-group-text" id="basic-addon1">@</span>
