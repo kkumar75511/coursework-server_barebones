@@ -13,7 +13,6 @@ public class MessageController {
     @Path("new")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
-
     public String newMessage (@FormParam("messageText") String messageText,
                                 @FormParam("messageAuthor") String messageAuthor) {
 
@@ -21,6 +20,12 @@ public class MessageController {
         String messageDate = new Date().toString();
 
         Message.messages.add(new Message(messageID, messageText, messageDate, messageAuthor));
+
+        return getMessageList();
+
+    }
+
+    private String getMessageList () {
 
         JSONArray messageList = new JSONArray();
 
