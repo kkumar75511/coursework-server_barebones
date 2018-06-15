@@ -1,5 +1,6 @@
 package server.controllers;
 
+import org.json.simple.JSONArray;
 import server.models.Message;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,7 +12,7 @@ public class MessageController {
     @POST
     @Path("new")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
 
     public String newMessage (@FormParam("messageText") String messageText,
                                 @FormParam("messageAuthor") String messageAuthor) {
@@ -21,16 +22,15 @@ public class MessageController {
 
         Message.messages.add(new Message(messageID, messageText, messageDate, messageAuthor));
 
-        StringBuilder messageSummary = new StringBuilder();
+        JSONArray messageList = new JSONArray();
 
-        for (int i = 0; i < Message.messages.size(); i++) {
+        for (Message m : Message.messages) {
 
-            messageSummary.append(Message.messages.get(i).toString());
-            messageSummary.append("\n");
+            messageList.add(m.toJSON());
 
         }
 
-        return messageSummary.toString();
+        return messageList.toString();
 
     }
 
