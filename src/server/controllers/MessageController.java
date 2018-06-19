@@ -1,7 +1,11 @@
 package server.controllers;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import server.Console;
 import server.models.Message;
+import server.models.services.MessageService;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
@@ -42,9 +46,25 @@ public class MessageController {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
+    @SuppressWarnings("unchecked")
     public String listMessage () {
 
-        return getMessageList();
+        Console.log("/message/list - Getting all messages from database");
+
+        String status = MessageService.selectAllInto(Message.messages);
+
+        if (status.equals("OK")) {
+
+            return getMessageList();
+
+        } else {
+
+            JSONObject response = new JSONObject();
+            response.put("error", status);
+
+            return response.toString();
+
+        }
 
     }
 
