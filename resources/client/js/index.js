@@ -14,13 +14,21 @@ function loadMessages () {
         type: 'GET',
         success: messageList => {
 
-            for (let message of messageList) {
+            if (messageList.hasOwnProperty('error')) {
 
-                messagesHTML += renderMessage(message);
+                alert(messageList.eror);
+
+            } else {
+
+                for (let message of messageList) {
+
+                    messagesHTML += renderMessage(message);
+
+                }
+
+                $('#messages').html(messagesHTML);
 
             }
-
-            $('#messages').html(messagesHTML);
 
         }
 

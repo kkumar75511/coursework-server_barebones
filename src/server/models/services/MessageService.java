@@ -12,51 +12,77 @@ import java.util.List;
 public class MessageService {
 
     public static String selectAllInto(List<Message> targetList) {
+
         targetList.clear();
+
         try {
+
             PreparedStatement statement = DatabaseConnection.newStatement(
                     "SELECT Id, Text, PostDate, Author FROM Messages"
             );
+
             if (statement != null) {
+
                 ResultSet results = statement.executeQuery();
+
                 if (results != null) {
+
                     while (results.next()) {
+
                         targetList.add(new Message(results.getInt("Id"), results.getString("Text"), results.getString("PostDate"), results.getString("Author")));
 
-
                     }
+
                 }
+
             }
+
         } catch (SQLException resultsException) {
+
             String error = "Database error - can't select all from 'Messages' table: " + resultsException.getMessage();
 
             Console.log(error);
             return error;
+
         }
+
         return "OK";
+
     }
 
     public static Message selectById(int id) {
+
         Message result = null;
+
         try {
+
             PreparedStatement statement = DatabaseConnection.newStatement(
                     "SELECT Id, Text, PostDate, Author FROM Messages WHERE Id = ?"
             );
+
             if (statement != null) {
+
                 statement.setInt(1, id);
                 ResultSet results = statement.executeQuery();
+
                 if (results != null && results.next()) {
+
                     result = new Message(results.getInt("Id"), results.getString("Text"), results.getString("PostDate"), results.getString("Author"));
 
-
                 }
+
             }
+
         } catch (SQLException resultsException) {
+
             String error = "Database error - can't select by id from 'Messages' table: " + resultsException.getMessage();
 
             Console.log(error);
+
         }
+
         return result;
+
     }
 
     public static String insert(Message itemToSave) {

@@ -16,16 +16,18 @@ public class MessageController {
     @POST
     @Path("new")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public String newMessage (@FormParam("messageText") String messageText,
                                 @FormParam("messageAuthor") String messageAuthor) {
 
+        Console.log("/message/new - Posted by " + messageAuthor);
+
+        MessageService.selectAllInto(Message.messages);
         int messageID = Message.nextID();
         String messageDate = new Date().toString();
 
-        Message.messages.add(new Message(messageID, messageText, messageDate, messageAuthor));
-
-        return getMessageList();
+        Message newMessage = new Message(messageID, messageText, messageDate, messageAuthor);
+        return MessageService.insert(newMessage);
 
     }
 
