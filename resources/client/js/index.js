@@ -1,6 +1,7 @@
 function pageLoad() {
 
     loadMessages();
+    resetForm();
 
 }
 
@@ -45,5 +46,40 @@ function renderMessage (message) {
                 `</div>` +
                 `<div class="py-2 mx-2">${message.text}</div>` +
             `</div>`;
+
+}
+
+function resetForm () {
+
+    const form = $('#messageForm');
+    form.unbind("submit");
+
+    form.on("submit", event => {
+
+        event.preventDefault();
+
+        $.ajax ({
+
+            url: '/message/new',
+            type: 'POST',
+            data: form.serialize(),
+
+            success: reponse => {
+
+                if (reponse === 'OK') {
+
+                    pageLoad();
+
+                } else {
+
+                    alert(reponse);
+
+                }
+
+            }
+
+        })
+
+    })
 
 }
