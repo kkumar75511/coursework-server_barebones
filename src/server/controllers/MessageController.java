@@ -6,7 +6,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
 
-@Path("message/")
+@Path("message/")                       // message/new
 public class MessageController {
 
     @POST
