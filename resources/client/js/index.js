@@ -31,7 +31,7 @@ function loadMessages () {
 
                 $('#messages').html(messagesHTML);
 
-                resetDeleteButton();
+                resetDeleteButtons();
 
             }
 
@@ -47,11 +47,11 @@ function renderMessage (message) {
                 `<div>` +
                     `<span class="badge badge-primary mr-2">${message.author}</span>` +
                     `<span class="badge badge-info">${message.postDate}</span>` +
-                    '<div class="float-right">' +
-                        '<button class="deleteMessage btn btn-sm btn-danger ml-2" data-message-id="${message.id}">' +
-                            'Delete' +
-                        '</button>' +
-                    '</div>' +
+                    `<div class="float-right">` +
+                        `<button class="deleteMessage btn btn-sm btn-danger ml-2" data-message-id="${message.id}">` +
+                            `Delete` +
+                        `</button>` +
+                    `</div>` +
                 `</div>` +
                 `<div class="messageText py-2 mx-2" id=""text${message.id}>${message.text}</div>` +
             `</div>`;
@@ -93,7 +93,7 @@ function resetForm () {
 
 }
 
-function resetDeleteButton () {
+function resetDeleteButtons () {
 
     $('.deleteMessage').click(event => {
 
@@ -105,7 +105,7 @@ function resetDeleteButton () {
             type: 'POST',
             data: {"messageId" : messageId},
 
-            success: reponse => {
+            success: response => {
 
                 if (response === 'OK') {
 
@@ -113,13 +113,13 @@ function resetDeleteButton () {
 
                 } else {
 
-                    alert(reponse);
+                    alert(response);
 
                 }
 
             }
 
-        })
+        });
 
     });
 
