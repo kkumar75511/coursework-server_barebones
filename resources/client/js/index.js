@@ -37,6 +37,8 @@ function loadMessages () {
                 $('#messages').html(messagesHTML);
 
                 resetDeleteButtons();
+                resetEditButtons();
+                cancelEdits();
 
             }
 
@@ -177,6 +179,35 @@ function resetEditButtons () {
         editInput.val(currentText);
         editInput.show().focus().select();
         textDiv.hide();
+
+    })
+
+}
+
+function saveEdit (event) {
+
+    const messageId = $(event.target).attr('data-message-id');
+    const editedText = $("#editInput" + messageId).val();
+
+    $.ajax({
+
+        url: '/message/edit',
+        type: 'POST',
+        data: {"messageId": messageId, "messageText": editedText},
+
+        success: response => {
+
+            if (response === 'OK') {
+
+                pageLoad();
+
+            } else {
+
+                alert(response);
+
+            }
+
+        }
 
     })
 
