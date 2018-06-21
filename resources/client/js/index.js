@@ -152,3 +152,32 @@ function cancelEdits () {
     $(".deleteMessage").show();
 
 }
+
+function resetEditButtons () {
+
+    $('.editMessage').click(event => {
+
+        cancelEdits();
+
+        const editButton = $(event.target);
+        const saveButton = editButton.next();
+        const cancelButton = saveButton.next();
+        const deleteButton = cancelButton.next();
+        const messageId = editButton.attr("data-message-id");
+        const textDiv = $("#text" + messageId);
+        const currentText = textDiv.text();
+        const editInput = textDiv.next();
+
+        editButton.hide();
+        saveButton.show();
+        cancelButton.show();
+        deleteButton.hide();
+        saveButton.click(event => saveEdit(event));
+        cancelButton.click(event => cancelEdits());
+        editInput.val(currentText);
+        editInput.show().focus().select();
+        textDiv.hide();
+
+    })
+
+}
