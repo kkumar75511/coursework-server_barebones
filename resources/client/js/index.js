@@ -31,6 +31,8 @@ function loadMessages () {
 
                 $('#messages').html(messagesHTML);
 
+                resetDeleteButton();
+
             }
 
         }

@@ -70,4 +70,26 @@ public class MessageController {
 
     }
 
+    @POST
+    @Path("delete")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String deleteMessage (@FormParam("messageId")  int messageId) {
+
+        Console.log("/message/delete - Message " + messageId);
+
+        Message message = MessageService.selectById(messageId);
+
+        if (message == null) {
+
+            return "That message doesn't appear to exist";
+
+        } else {
+
+            return MessageService.deleteById(messageId);
+
+        }
+
+    }
+
 }
