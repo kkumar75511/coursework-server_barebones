@@ -9,6 +9,8 @@ function loadMessages () {
 
     let messagesHTML = '';
 
+    $("input[name='messageText']").val("");
+
     $.ajax ({
 
         url: '/message/list',
@@ -43,8 +45,13 @@ function renderMessage (message) {
                 `<div>` +
                     `<span class="badge badge-primary mr-2">${message.author}</span>` +
                     `<span class="badge badge-info">${message.postDate}</span>` +
+                    '<div class="float-right">' +
+                        '<button class="deleteMessage btn btn-sm btn-danger ml-2" data-message-id="${message.id}">' +
+                            'Delete' +
+                        '</button>' +
+                    '</div>' +
                 `</div>` +
-                `<div class="py-2 mx-2">${message.text}</div>` +
+                `<div class="messageText py-2 mx-2" id=""text${message.id}>${message.text}</div>` +
             `</div>`;
 
 }

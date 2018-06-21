@@ -95,11 +95,6 @@ public class MessageService {
             statement.setString(3, itemToSave.getMessageDate());
             statement.setString(4, itemToSave.getMessageAuthor());
 
-
-
-
-
-
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {
