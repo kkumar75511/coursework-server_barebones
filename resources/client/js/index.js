@@ -14,7 +14,7 @@ function loadMessages () {
 
     let messagesHTML = '';
 
-    $("input[name='messageText']").val("");
+    // $("input[name='messageText']").val("");
 
     $.ajax ({
 
@@ -24,7 +24,7 @@ function loadMessages () {
 
             if (messageList.hasOwnProperty('error')) {
 
-                alert(messageList.eror);
+                alert(messageList.error);
 
             } else {
 
@@ -50,28 +50,28 @@ function loadMessages () {
 
 function renderMessage (message) {
 
-    return  `<div class="border border-primary p-2 m-2">` +
-                `<div>` +
-                    `<span class="badge badge-primary mr-2">${message.author}</span>` +
-                    `<span class="badge badge-info">${message.postDate}</span>` +
-                    `<div class="float-right">` +
-                        `<button class="editMessage btn btn-sm btn-secondary ml-2" data-message-id="${message.id}">` +
-                            `Edit` +
-                        `</button>` +
-                        `<button class="saveMessage btn btn-sm btn-success ml-2" data-message-id="${message.id}">` +
-                            `Save` +
-                        `</button>` +
-                        `<button class="cancelEditMessage btn btn-sm btn-warning ml-2" data-message-id="${message.id}">` +
-                            `Cancel` +
-                        `</button>` +
-                        `<button class="deleteMessage btn btn-sm btn-danger ml-2" data-message-id="${message.id}">` +
-                            `Delete` +
-                        `</button>` +
-                    `</div>` +
-                `</div>` +
-                `<div class="messageText py-2 mx-2" id=""text${message.id}>${message.text}</div>` +
-                `<input class="messageEditInput w-100 form-control" id="editInput${message.id}">` +
-            `</div>`;
+    return `<div class="border border-primary p-2 m-2">` +
+        `<div>` +
+        `<span class="badge badge-primary mr-2">${message.author}</span>` +
+        `<span class="badge badge-info">${message.postDate}</span>` +
+        `<div class="float-right">` +
+        `<button class="editMessage btn btn-sm btn-secondary ml-2" data-message-id="${message.id}">` +
+        `Edit` +
+        `</button>` +
+        `<button class="saveMessage btn btn-sm btn-success ml-2" data-message-id="${message.id}">` +
+        `Save` +
+        `</button>` +
+        `<button class="cancelEditMessage btn btn-sm btn-warning ml-2" data-message-id="${message.id}">` +
+        `Cancel` +
+        `</button>` +
+        `<button class="deleteMessage btn btn-sm btn-danger ml-2" data-message-id="${message.id}">` +
+        `Delete` +
+        `</button>` +
+        `</div>` +
+        `</div>` +
+        `<div class="messageText py-2 mx-2" id="text${message.id}">${message.text}</div>` +
+        `<input class="messageEditInput w-100 form-control" id="editInput${message.id}">` +
+        `</div>`;
 
 }
 
@@ -180,7 +180,7 @@ function resetEditButtons () {
         editInput.show().focus().select();
         textDiv.hide();
 
-    })
+    });
 
 }
 
@@ -193,7 +193,7 @@ function saveEdit (event) {
 
         url: '/message/edit',
         type: 'POST',
-        data: {"messageId": messageId, "messageText": editedText},
+        data: {"messageId" : messageId, "messageText" : editedText},
 
         success: response => {
 

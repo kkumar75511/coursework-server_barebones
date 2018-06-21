@@ -85,7 +85,7 @@ public class MessageService {
 
     }
 
-    public static String insert(Message itemToSave) {
+    public static String insert (Message itemToSave) {
         try {
             PreparedStatement statement = DatabaseConnection.newStatement(
                     "INSERT INTO Messages (Id, Text, PostDate, Author) VALUES (?, ?, ?, ?)"
@@ -105,22 +105,31 @@ public class MessageService {
         }
     }
 
-    public static String update(Message itemToSave) {
+    public static String update (Message itemToSave) {
+
         try {
+
             PreparedStatement statement = DatabaseConnection.newStatement(
                     "UPDATE Messages SET Text = ?, PostDate = ?, Author = ? WHERE Id = ?"
             );
+
             statement.setString(1, itemToSave.getMessageText());
             statement.setString(2, itemToSave.getMessageDate());
             statement.setString(3, itemToSave.getMessageAuthor());
             statement.setInt(4, itemToSave.getMessageID());
             statement.executeUpdate();
+
             return "OK";
+
         } catch (SQLException resultsException) {
+
             String error = "Database error - can't update 'Messages' table: " + resultsException.getMessage();
             Console.log(error);
+
             return error;
+
         }
+
     }
 
     public static String deleteById(int id) {

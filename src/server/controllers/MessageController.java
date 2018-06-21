@@ -109,9 +109,10 @@ public class MessageController {
         } else {
 
             String messageDate = new Date().toString();
+
             message.setMessageText(messageText);
             message.setMessageDate(messageDate);
-            
+
             return MessageService.update(message);
 
         }
