@@ -113,18 +113,11 @@ public class MessageService {
             statement.setString(1, itemToSave.getMessageText());
             statement.setString(2, itemToSave.getMessageDate());
             statement.setString(3, itemToSave.getMessageAuthor());
-
-
-
-
-
-
             statement.setInt(4, itemToSave.getMessageID());
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {
             String error = "Database error - can't update 'Messages' table: " + resultsException.getMessage();
-
             Console.log(error);
             return error;
         }
