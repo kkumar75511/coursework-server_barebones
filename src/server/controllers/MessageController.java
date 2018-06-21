@@ -92,4 +92,30 @@ public class MessageController {
 
     }
 
+    @POST
+    @Path("edit")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String editMessage (@FormParam("messageId") int messageId, @FormParam("messageText") String messageText) {
+
+        Console.log("/message/edit - Message " + messageId);
+
+        Message message = MessageService.selectById(messageId);
+
+        if (message == null) {
+
+            return "That message doesn't appear to exist";
+
+        } else {
+
+            String messageDate = new Date().toString();
+            message.setMessageText(messageText);
+            message.setMessageDate(messageDate);
+            
+            return MessageService.update(message);
+
+        }
+
+    }
+
 }
