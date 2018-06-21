@@ -90,3 +90,35 @@ function resetForm () {
     })
 
 }
+
+function resetDeleteButton () {
+
+    $('.deleteMessage').click(event => {
+
+        const messageId = $(event.target).attr('data-message-id');
+
+        $.ajax ({
+
+            url: '/message/delete',
+            type: 'POST',
+            data: {"messageId" : messageId},
+
+            success: reponse => {
+
+                if (response === 'OK') {
+
+                    pageLoad();
+
+                } else {
+
+                    alert(reponse);
+
+                }
+
+            }
+
+        })
+
+    });
+
+}
