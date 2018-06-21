@@ -1,4 +1,9 @@
+let refresher;
+
 function pageLoad() {
+
+    clearInterval(refresher);
+    refresher = setInterval(loadMessages, 2500);
 
     loadMessages();
     resetForm();
@@ -48,12 +53,22 @@ function renderMessage (message) {
                     `<span class="badge badge-primary mr-2">${message.author}</span>` +
                     `<span class="badge badge-info">${message.postDate}</span>` +
                     `<div class="float-right">` +
+                        `<button class="editMessage btn btn-sm btn-secondary ml-2" data-message-id="${message.id}">` +
+                            `Edit` +
+                        `</button>` +
+                        `<button class="saveMessage btn btn-sm btn-success ml-2" data-message-id="${message.id}">` +
+                            `Save` +
+                        `</button>` +
+                        `<button class="cancelEditMessage btn btn-sm btn-warning ml-2" data-message-id="${message.id}">` +
+                            `Cancel` +
+                        `</button>` +
                         `<button class="deleteMessage btn btn-sm btn-danger ml-2" data-message-id="${message.id}">` +
                             `Delete` +
                         `</button>` +
                     `</div>` +
                 `</div>` +
                 `<div class="messageText py-2 mx-2" id=""text${message.id}>${message.text}</div>` +
+                `<input class="messageEditInput w-100 form-control" id="editInput${message.id}">` +
             `</div>`;
 
 }
@@ -77,6 +92,7 @@ function resetForm () {
 
                 if (reponse === 'OK') {
 
+                    $("input").val("");
                     pageLoad();
 
                 } else {
@@ -122,5 +138,17 @@ function resetDeleteButtons () {
         });
 
     });
+
+}
+
+function cancelEdits () {
+
+    $(".messageEditInput").hide();
+    $(".cancelEditMessage").hide();
+    $(".saveMessage").hide();
+
+    $(".messageText").show();
+    $(".editMessage").show();
+    $(".deleteMessage").show();
 
 }
