@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 
 public class User {
+
     private int id;
     private String username;
     private String password;
@@ -64,5 +65,12 @@ public class User {
 
 
         return j;
+    }
+
+    public User(int id, String username, String password, String sessionToken) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.sessionToken = sessionToken;
     }
 }
