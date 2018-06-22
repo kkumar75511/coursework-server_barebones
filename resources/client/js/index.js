@@ -159,6 +159,8 @@ function resetEditButtons () {
 
     $('.editMessage').click(event => {
 
+        clearInterval(refresher);
+
         cancelEdits();
 
         const editButton = $(event.target);
@@ -185,6 +187,8 @@ function resetEditButtons () {
 }
 
 function saveEdit (event) {
+
+    clearInterval(refresher);
 
     const messageId = $(event.target).attr('data-message-id');
     const editedText = $("#editInput" + messageId).val();
