@@ -5,6 +5,7 @@ function pageLoad() {
     clearInterval(refresher);
     refresher = setInterval(loadMessages, 2500);
 
+    checkLogin();
     loadMessages();
     resetForm();
 
@@ -214,5 +215,48 @@ function saveEdit (event) {
         }
 
     })
+
+}
+
+function checkLogin () {
+
+    let token = Cookies.get("sessionToken");
+
+    if (token === undefined) {
+
+        window.location.href = "/client/login.html";
+
+    } else {
+
+        $.ajax ({
+
+            url: '/user/get',
+            type: 'GET',
+
+            success: username => {
+
+                if (username === "") {
+
+                    window.location.href = "/client/login.html";
+
+                } else {
+
+                    $("#username").html(username);
+
+                }
+
+            }
+
+        });
+
+    }
+
+    $("#logout").click(event => {
+
+        Cookies.remove("sessionToken");
+
+        window.location.href = "/client/login.html";
+
+    });
 
 }
