@@ -117,11 +117,18 @@ public class MessageController {
     @Path("edit")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
-    public String editMessage (@FormParam("messageId") int messageId, @FormParam("messageText") String messageText) {
+    public String editMessage (@FormParam("messageId") int messageId,
+                               @FormParam("messageText") String messageText,
+                               @CookieParam("sessionToken") Cookie sessionCookie) {
+
+        String currentUsername = UserService.validateSessionCookie(sessionCookie);
+        if (currentUsername == null) return "Error: Invalid user session token";
 
         Console.log("/message/edit - Message " + messageId);
 
         Message message = MessageService.selectById(messageId);
+
+        String messageDate = new Date().toString();
 
         if (message == null) {
 
@@ -129,7 +136,11 @@ public class MessageController {
 
         } else {
 
-            String messageDate = new Date().toString();
+            if (!message.getMessageAuthor().equals(currentUsername)) {
+
+                return "That message doesn't belong to you!";
+
+            }
 
             message.setMessageText(messageText);
             message.setMessageDate(messageDate);
