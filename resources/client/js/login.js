@@ -38,6 +38,14 @@ function resetNewUserForm() {
     });
 }
 
+function checkLogin () {
+
+    let token = Cookies.get("sessionToken");
+
+
+
+}
+
 function pageLoad() {
     resetLoginForm();
     resetNewUserForm();
