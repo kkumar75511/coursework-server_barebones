@@ -5,8 +5,10 @@ import org.json.simple.JSONObject;
 import server.Console;
 import server.models.Message;
 import server.models.services.MessageService;
+import server.models.services.UserService;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
 
@@ -49,7 +51,13 @@ public class MessageController {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     @SuppressWarnings("unchecked")
-    public String listMessage () {
+    public String listMessage (@CookieParam("sessionToken") Cookie sessionCookie) {
+
+        if (UserService.validateSessionCookie(sessionCookie) == null) {
+
+            return "Error: Invalid user session token";
+
+        }
 
         Console.log("/message/list - Getting all messages from database");
 
