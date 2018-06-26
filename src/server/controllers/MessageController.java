@@ -85,7 +85,11 @@ public class MessageController {
     @Path("delete")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
-    public String deleteMessage (@FormParam("messageId")  int messageId) {
+    public String deleteMessage (@FormParam("messageId")  int messageId,
+                                 @CookieParam("sessionToken") Cookie sessionCookie) {
+
+        String currentUsername = UserService.validateSessionCookie(sessionCookie);
+        if (currentUsername == null) return "Error: Invalid user session token";
 
         Console.log("/message/delete - Message " + messageId);
 
@@ -96,6 +100,12 @@ public class MessageController {
             return "That message doesn't appear to exist";
 
         } else {
+
+            if (!message.getMessageAuthor().equals(currentUsername)) {
+
+                return "That message doesn't belong to you!";
+
+            }
 
             return MessageService.deleteById(messageId);
 
