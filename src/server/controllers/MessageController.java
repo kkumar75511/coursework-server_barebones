@@ -20,15 +20,18 @@ public class MessageController {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
     public String newMessage (@FormParam("messageText") String messageText,
-                                @FormParam("messageAuthor") String messageAuthor) {
+                              @CookieParam("sessionToken") Cookie sessionCookie) {
 
-        Console.log("/message/new - Posted by " + messageAuthor);
+        String currentUsername = UserService.validateSessionCookie(sessionCookie);
+        if (currentUsername == null) return "Error: Invalid user session token";
+
+        Console.log("/message/new - Posted by " + currentUsername);
 
         MessageService.selectAllInto(Message.messages);
         int messageID = Message.nextID();
         String messageDate = new Date().toString();
 
-        Message newMessage = new Message(messageID, messageText, messageDate, messageAuthor);
+        Message newMessage = new Message(messageID, messageText, messageDate, currentUsername);
         return MessageService.insert(newMessage);
 
     }
