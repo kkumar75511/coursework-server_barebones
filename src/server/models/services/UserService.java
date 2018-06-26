@@ -4,6 +4,7 @@ import server.Console;
 import server.DatabaseConnection;
 import server.models.User;
 
+import javax.ws.rs.core.Cookie;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -123,6 +124,37 @@ public class UserService {
             Console.log(error);
             return error;
         }
+    }
+
+    public static String validateSessionCookie (Cookie sessionCookie) {
+
+        if (sessionCookie != null) {
+
+            String token = sessionCookie.getValue();
+            String result = UserService.selectAllInto(User.users);
+
+            if (result.equals("OK")) {
+
+                for (User u : User.users) {
+
+                    if (u.getSessionToken().equals(token)) {
+
+                        Console.log("Valid session token received");
+
+                        return u.getUsername();
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        Console.log("Error: Invalid user session token");
+
+        return null;
+
     }
 
 }
