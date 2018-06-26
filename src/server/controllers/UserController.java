@@ -5,10 +5,31 @@ import server.models.User;
 import server.models.services.UserService;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import java.util.UUID;
 
+@Path("user/")
 public class UserController {
+
+    @GET
+    @Path("get")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getUser (@CookieParam("sessionToken") Cookie sessionCookie) {
+
+        String currentUser = UserService.validateSessionCookie(sessionCookie);
+
+        if (currentUser == null) {
+
+            return "";
+
+        } else {
+
+            return currentUser;
+
+        }
+
+    }
 
     @POST
     @Path("new")
