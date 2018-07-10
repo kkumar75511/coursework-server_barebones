@@ -49,4 +49,18 @@ function checkLogin () {
 function pageLoad() {
     resetLoginForm();
     resetNewUserForm();
+
+    const pattern = Trianglify({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+
+    const firstDiv = $('div:first');
+    firstDiv.before(pattern.canvas);
+    firstDiv.addClass('fixed-top');
+
+    const body = $('body');
+    body.css('overflow-y', 'hidden');
+    body.css('overflow-x', 'hidden');
+
 }
